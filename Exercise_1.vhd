@@ -34,9 +34,13 @@ begin
         for i in 0 to 2 loop -- Check vectors score_a and score_b for '1' and grow temporary variables accordingly
             if score_a(i) = '1' then
                 TMP_a := TMP_a + 1;
+            else
+                TMP_a := TMP_a;
             end if;
             if score_b(i) = '1' then
                 TMP_b := TMP_b + 1;
+            else
+                TMP_b := TMP_b;
             end if;
         end loop;
         
