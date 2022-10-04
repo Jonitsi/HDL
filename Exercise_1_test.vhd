@@ -30,31 +30,146 @@ architecture tb of Exercise_1_test is
     signal test_b       : std_logic_vector(2 downto 0);
     signal test_winner  : std_logic_vector(1 downto 0);
 
-    function results(
+    function results( -- results function to supply assert with expected results
         a   : in std_logic_vector(2 downto 0);
         b   : in std_logic_vector(2 downto 0)
         )
         return std_logic_vector is variable w: std_logic_vector(1 downto 0); -- output w for results, which will be compared to simulation values
         
-        variable test_TMP_a: integer; -- Temporary variable for each players' score
-        variable test_TMP_b: integer;
-        
     begin 
-            for i in 0 to 2 loop -- check vectors a and b for '1' and grow temporary variables accordingly
-                if a(i) = '1' then
-                    test_TMP_a := test_TMP_a + 1;
-                end if;
-                if b(i) = '1' then
-                    test_TMP_b := test_TMP_b + 1;
-                end if;
-            end loop;
+        if a = "000" and b = "000" then -- truth table to check all possible binary combination 0-64 :)
+            w := "00";
+        elsif a = "000" and b = "001" then
+            w := "01";
+        elsif a = "000" and b = "010" then
+            w := "01";
+        elsif a = "000" and b = "011" then
+            w := "01";
+        elsif a = "000" and b = "100" then
+            w := "01";
+        elsif a = "000" and b = "101" then
+            w := "01";
+        elsif a = "000" and b = "110" then
+            w := "01";
+        elsif a = "000" and b = "111" then
+            w := "01";
+        elsif a = "001" and b = "000" then
+            w := "10";
+        elsif a = "001" and b = "001" then
+            w := "11";
+        elsif a = "001" and b = "010" then
+            w := "11";
+        elsif a = "001" and b = "011" then
+            w := "01";
+        elsif a = "001" and b = "100" then
+            w := "11";
+        elsif a = "001" and b = "101" then
+            w := "01";
+        elsif a = "001" and b = "110" then
+            w := "01";
+        elsif a = "001" and b = "111" then
+            w := "01";
+        elsif a = "010" and b = "000" then
+            w := "10";
+        elsif a = "010" and b = "001" then
+            w := "11";
+        elsif a = "010" and b = "010" then
+            w := "11";
+        elsif a = "010" and b = "011" then
+            w := "01";
+        elsif a = "010" and b = "100" then
+            w := "11";
+        elsif a = "010" and b = "101" then
+            w := "01";
+        elsif a = "010" and b = "110" then
+            w := "01";
+        elsif a = "010" and b = "111" then
+            w := "01";
+        elsif a = "011" and b = "000" then
+            w := "10";
+        elsif a = "011" and b = "001" then
+            w := "10";
+        elsif a = "011" and b = "010" then
+            w := "10";
+        elsif a = "011" and b = "011" then
+            w := "11";
+        elsif a = "011" and b = "100" then
+            w := "10";
+        elsif a = "011" and b = "101" then
+            w := "11";
+        elsif a = "011" and b = "110" then
+            w := "11";
+        elsif a = "011" and b = "111" then
+            w := "01";
+        elsif a = "100" and b = "000" then
+            w := "10";
+        elsif a = "100" and b = "001" then
+            w := "11";
+        elsif a = "100" and b = "010" then
+            w := "11";
+        elsif a = "100" and b = "011" then
+            w := "01";
+        elsif a = "100" and b = "100" then
+            w := "11";
+        elsif a = "100" and b = "101" then
+            w := "01";
+        elsif a = "100" and b = "110" then
+            w := "01";
+        elsif a = "100" and b = "111" then
+            w := "01";
+        elsif a = "101" and b = "000" then
+            w := "10";
+        elsif a = "101" and b = "001" then
+            w := "10";
+        elsif a = "101" and b = "010" then
+            w := "10";
+        elsif a = "101" and b = "011" then
+            w := "11";
+        elsif a = "101" and b = "100" then
+            w := "10";
+        elsif a = "101" and b = "101" then
+            w := "11";
+        elsif a = "101" and b = "110" then
+            w := "11";
+        elsif a = "101" and b = "111" then
+            w := "01";
+        elsif a = "110" and b = "000" then
+            w := "10";
+        elsif a = "110" and b = "001" then
+            w := "10";
+        elsif a = "110" and b = "010" then
+            w := "10";
+        elsif a = "110" and b = "011" then
+            w := "11";
+        elsif a = "110" and b = "100" then
+            w := "10";
+        elsif a = "110" and b = "101" then
+            w := "11";
+        elsif a = "110" and b = "110" then
+            w := "11";
+        elsif a = "110" and b = "111" then
+            w := "01";
+        elsif a = "111" and b = "000" then
+            w := "10";
+        elsif a = "111" and b = "001" then
+            w := "10";
+        elsif a = "111" and b = "010" then
+            w := "10";
+        elsif a = "111" and b = "011" then
+            w := "10";
+        elsif a = "111" and b = "100" then
+            w := "10";
+        elsif a = "111" and b = "101" then
+            w := "10";
+        elsif a = "111" and b = "110" then
+            w := "10";
+        elsif a = "111" and b = "111" then
+            w := "11";
+        else
+            w := "00";
+        end if;
             
-            w := "00" when test_TMP_a = 0 and test_TMP_b = 0 else -- Check for winner and assign corresponding value to 'w'
-            "10" when test_TMP_a > test_TMP_b else
-            "01" when test_TMP_a < test_TMP_b else
-            "11" when test_TMP_a = test_TMP_b;
-            
-            return w;
+        return w;
     end;    
     
 begin
@@ -70,7 +185,7 @@ begin
                 wait for 10ns;
                 assert (test_winner = results(test_a, test_b)) -- check that simulation output matches theoretical output and report accordingly
                     report "TEST FAILURE"
-                    severity error; 
+                    severity error;
             end loop;
         end loop;
     end process;
